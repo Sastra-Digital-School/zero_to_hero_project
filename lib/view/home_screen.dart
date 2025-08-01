@@ -22,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Screen'),
+        title: Text('Home'),
         actions: [
           IconButton(
             icon: const Icon(Icons.notifications),
@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) {
                   return AlertDialog(
                     title: const Text('Notifications'),
-                    content: const Text('No notifications168'),
+                    content: const Text('No notifications'),
                   );
                 },
               );
@@ -76,7 +76,7 @@ class Home extends StatelessWidget {
         ListTile(
           leading: const Icon(Icons.location_on),
           title: const Text('Location'),
-          subtitle: const Text('New York, USA'),
+          subtitle: const Text('New York, USA, Camboida'),
         ),
       ],
     );
