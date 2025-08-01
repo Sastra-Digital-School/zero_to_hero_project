@@ -21,7 +21,25 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Home Screen')),
+      appBar: AppBar(
+        title: Text('Home Screen'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: const Text('Notifications'),
+                    content: const Text('No notifications'),
+                  );
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: _children[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         onTap: onTabTapped,
@@ -43,7 +61,25 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Home'));
+    return ListView(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.person),
+          title: const Text('John Doe'),
+          subtitle: const Text('johndoe@example.com'),
+        ),
+        ListTile(
+          leading: const Icon(Icons.calendar_today),
+          title: const Text('Today'),
+          subtitle: const Text('Thursday, 10th March'),
+        ),
+        ListTile(
+          leading: const Icon(Icons.location_on),
+          title: const Text('Location'),
+          subtitle: const Text('New York, USA'),
+        ),
+      ],
+    );
   }
 }
 
@@ -52,6 +88,38 @@ class Settings extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('Settings'));
+    return ListView(
+      children: [
+        ListTile(
+          leading: const Icon(Icons.dark_mode),
+          title: const Text('Dark Mode'),
+          trailing: Switch(value: false, onChanged: (value) {}),
+        ),
+        ListTile(
+          leading: const Icon(Icons.language),
+          title: const Text('Language'),
+          subtitle: const Text('English'),
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Language'),
+                  content: const Text('Please select your language'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('OK'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      ],
+    );
   }
 }
