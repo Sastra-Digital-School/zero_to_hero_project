@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context) {
                   return AlertDialog(
                     title: const Text('Notifications'),
-                    content: const Text('No notifications'),
+                    content: const Text('No notifications168'),
                   );
                 },
               );
