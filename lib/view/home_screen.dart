@@ -1,124 +1,93 @@
 import 'package:flutter/material.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-
-  final List<Widget> _children = [Home(), Settings()];
-
-  void onTabTapped(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Home'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text('Notifications'),
-                    content: const Text('No notifications'),
-                  );
-                },
-              );
+      appBar: _buildAppBar,
+      body: _buildBody,
+      bottomNavigationBar: _buildBottomNavigationBar,
+      drawer: _buildDrawer(context),
+    );
+  }
+
+  get _buildAppBar {
+    return AppBar(
+      centerTitle: true,
+      title: Text('Home'),
+      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+    );
+  }
+
+  _buildDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: [
+          DrawerHeader(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                CircleAvatar(radius: 30),
+                Column(
+                  children: [Text('Drawer Header'), Text('Drawer Header')],
+                ),
+              ],
+            ),
+          ),
+          ListTile(
+            leading: Icon(Icons.home),
+            title: Text('Home'),
+            onTap: () {
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text('Settings'),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, '/settings');
             },
           ),
         ],
       ),
-      body: _children[_currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
-        onTap: onTabTapped,
-        currentIndex: _currentIndex,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
-          ),
-        ],
-      ),
     );
   }
-}
 
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
+  get _buildBody => Container(
+    color: Colors.amber,
+    child: Column(
       children: [
-        ListTile(
-          leading: const Icon(Icons.person),
-          title: const Text('John Doe'),
-          subtitle: const Text('johndoe@example.com'),
-        ),
-        ListTile(
-          leading: const Icon(Icons.calendar_today),
-          title: const Text('Today'),
-          subtitle: const Text('Thursday, 10th March'),
-        ),
-        ListTile(
-          leading: const Icon(Icons.location_on),
-          title: const Text('Location'),
-          subtitle: const Text('New York, USA, Camboida'),
-        ),
+        Container(color: Colors.cyan, height: 80),
+        Container(color: Colors.grey, height: 168),
+        Expanded(child: Container(color: Colors.blue)),
       ],
-    );
-  }
-}
+    ),
+  );
 
-class Settings extends StatelessWidget {
-  const Settings({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        ListTile(
-          leading: const Icon(Icons.dark_mode),
-          title: const Text('Dark Mode'),
-          trailing: Switch(value: false, onChanged: (value) {}),
+  get _buildBottomNavigationBar {
+    return BottomNavigationBar(
+      currentIndex: 0,
+      selectedItemColor: Colors.amber,
+      unselectedItemColor: Colors.grey,
+      selectedLabelStyle: TextStyle(
+        color: Colors.amber,
+        fontWeight: FontWeight.bold,
+      ),
+      unselectedLabelStyle: TextStyle(color: Colors.grey),
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
+      items: [
+        BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.navigation_rounded),
+          label: 'Navigate',
         ),
-        ListTile(
-          leading: const Icon(Icons.language),
-          title: const Text('Language'),
-          subtitle: const Text('English'),
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (context) {
-                return AlertDialog(
-                  title: const Text('Language'),
-                  content: const Text('Please select your language'),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: const Text('OK'),
-                    ),
-                  ],
-                );
-              },
-            );
-          },
-        ),
+        BottomNavigationBarItem(icon: Icon(Icons.history), label: 'History'),
+        BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Person'),
       ],
     );
   }
