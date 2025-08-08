@@ -6,18 +6,28 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.cyan.shade200,
       appBar: _buildAppBar,
       body: _buildBody,
-      bottomNavigationBar: _buildBottomNavigationBar,
+      // bottomNavigationBar: _buildBottomNavigationBar,
       drawer: _buildDrawer(context),
     );
   }
 
   get _buildAppBar {
     return AppBar(
+      backgroundColor: Colors.cyan.shade200,
       centerTitle: true,
-      title: Text('Home'),
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.search))],
+      leadingWidth: 70,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 20),
+        child: CircleAvatar(radius: 25, child: Icon(Icons.dashboard)),
+      ),
+      actions: [
+        CircleAvatar(radius: 25, child: Icon(Icons.notifications)),
+        SizedBox(width: 20),
+      ],
+      title: Text('FLEXIPAY'),
     );
   }
 
@@ -57,16 +67,51 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  get _buildBody => Container(
-    color: Colors.amber,
-    child: Column(
-      children: [
-        Container(color: Colors.cyan, height: 80),
-        Container(color: Colors.grey, height: 168),
-        Expanded(child: Container(color: Colors.blue)),
-      ],
-    ),
-  );
+  get _buildBody {
+    List<String> label = ['Shop', 'In-store', 'Rewards', 'Deals', 'Saved'];
+    List<IconData> icon = [
+      Icons.shopping_bag,
+      Icons.shop,
+      Icons.fast_rewind_sharp,
+      Icons.data_exploration,
+      Icons.saved_search,
+    ];
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, left: 20, right: 20),
+      child: Column(
+        spacing: 20,
+        children: [
+          SearchBar(
+            backgroundColor: WidgetStatePropertyAll(Colors.white),
+            padding: WidgetStatePropertyAll(EdgeInsets.only(left: 20)),
+            elevation: WidgetStatePropertyAll(0),
+            leading: Icon(Icons.search),
+            hintText: 'Search something',
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: List.generate(5, (index) {
+              return Column(
+                spacing: 5,
+                children: [
+                  Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(18),
+                    ),
+                    child: Icon(icon[index]),
+                  ),
+                  Text(label[index]),
+                ],
+              );
+            }),
+          ),
+        ],
+      ),
+    );
+  }
 
   get _buildBottomNavigationBar {
     return BottomNavigationBar(
