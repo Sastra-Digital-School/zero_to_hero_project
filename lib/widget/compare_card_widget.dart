@@ -38,8 +38,9 @@ class CompareCardWidget extends StatelessWidget {
               color: const Color.fromARGB(255, 1, 49, 2),
               borderRadius: BorderRadius.circular(25),
             ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   spacing: 15,

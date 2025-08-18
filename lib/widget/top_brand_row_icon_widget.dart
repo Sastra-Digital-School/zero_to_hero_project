@@ -45,7 +45,7 @@ class TopBrandRowIconWidget extends StatelessWidget {
           clipBehavior: Clip.none,
           scrollDirection: Axis.horizontal,
           child: Row(
-            spacing: 25,
+            spacing: 35,
             children: List.generate(label.length, (index) {
               return Column(
                 spacing: 10,
