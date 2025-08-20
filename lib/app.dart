@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/view/home_screen.dart';
+import 'package:flutter_zth_first/view/main_screen.dart';
 
 class SastraApp extends StatelessWidget {
   const SastraApp({super.key});
@@ -12,7 +12,7 @@ class SastraApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const HomeScreen(),
+      home: const MainScreen(),
     );
   }
 }

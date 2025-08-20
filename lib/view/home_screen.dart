@@ -15,51 +15,39 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _currentIndex = 0;
-
   @override
   Widget build(BuildContext context) {
-    return _currentIndex == 0
-        ? Scaffold(
-            appBar: _buildAppBar,
-            body: _buildBody(context),
-            drawer: _buildDrawer(context),
-            bottomNavigationBar: _buildBottomNavigationBar,
-          )
-        : Scaffold(
-            backgroundColor: _currentIndex == 1
-                ? Colors.white
-                : _currentIndex == 2
-                ? Colors.blue
-                : Colors.amber,
-            bottomNavigationBar: _buildBottomNavigationBar,
-          );
-  }
-
-  get _buildAppBar {
-    return AppBar(
-      backgroundColor: Colors.cyan.shade200,
-      centerTitle: true,
-      leadingWidth: 70,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 25,
-          child: Icon(Icons.dashboard),
-        ),
-      ),
-      actions: [
-        CircleAvatar(
-          backgroundColor: Colors.white,
-          radius: 25,
-          child: Icon(Icons.notifications),
-        ),
-        SizedBox(width: 20),
-      ],
-      title: Text('FLEXIPAY', style: TextStyle(fontWeight: FontWeight.bold)),
+    return Scaffold(
+      // appBar: _buildAppBar,
+      body: _buildBody(context),
+      drawer: _buildDrawer(context),
     );
   }
+
+  // get _buildAppBar {
+  //   return AppBar(
+  //     backgroundColor: Colors.cyan.shade200,
+  //     centerTitle: true,
+  //     leadingWidth: 70,
+  //     leading: Padding(
+  //       padding: const EdgeInsets.only(left: 20),
+  //       child: CircleAvatar(
+  //         backgroundColor: Colors.white,
+  //         radius: 25,
+  //         child: Icon(Icons.dashboard),
+  //       ),
+  //     ),
+  //     actions: [
+  //       CircleAvatar(
+  //         backgroundColor: Colors.white,
+  //         radius: 25,
+  //         child: Icon(Icons.notifications),
+  //       ),
+  //       SizedBox(width: 20),
+  //     ],
+  //     title: Text('FLEXIPAY', style: TextStyle(fontWeight: FontWeight.bold)),
+  //   );
+  // }
 
   _buildDrawer(BuildContext context) {
     return Drawer(
@@ -111,46 +99,43 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      child: SingleChildScrollView(
-        clipBehavior: Clip.none,
-        padding: EdgeInsets.only(bottom: 100),
-        child: Column(
-          spacing: 25,
-          children: [
-            SearchWidget(),
-            RowIconFeatureWidget(),
-            CompareCardWidget(),
-            PriceCardWidget(),
-            ProcessCardWidget(),
-            TopBrandRowIconWidget(),
-            TopBardsWarpWidget(),
-          ],
+      child: SafeArea(
+        child: SingleChildScrollView(
+          clipBehavior: Clip.none,
+          padding: EdgeInsets.only(bottom: 100),
+          child: Column(
+            spacing: 25,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 25,
+                    child: Icon(Icons.dashboard),
+                  ),
+                  Text(
+                    'FLEXIPAY',
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                  ),
+                  CircleAvatar(
+                    backgroundColor: Colors.white,
+                    radius: 25,
+                    child: Icon(Icons.notifications),
+                  ),
+                ],
+              ),
+              SearchWidget(),
+              RowIconFeatureWidget(),
+              CompareCardWidget(),
+              PriceCardWidget(),
+              ProcessCardWidget(),
+              TopBrandRowIconWidget(),
+              TopBardsWarpWidget(),
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  get _buildBottomNavigationBar {
-    List<Icon> icon = [
-      Icon(Icons.home),
-      Icon(Icons.save),
-      Icon(Icons.money),
-      Icon(Icons.person),
-    ];
-    List<String> label = ['Home', 'Saved', 'Money', 'Profile'];
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      currentIndex: _currentIndex,
-      selectedItemColor: Colors.cyan,
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      items: List.generate(icon.length, (index) {
-        return BottomNavigationBarItem(icon: icon[index], label: label[index]);
-      }),
     );
   }
 }
