@@ -1,54 +1,64 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zth_first/routes/routes.dart';
 import 'package:flutter_zth_first/view/home_screen.dart';
 import 'package:flutter_zth_first/view/save_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final int initialIndex;
+  const MainScreen({super.key, this.initialIndex = 0});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 0;
-  List<String> label = ['Home', 'Saved', 'Money', 'Profile'];
+  late int _currentIndex;
+
+  static const _labels = ['Home', 'Saved', 'Money', 'Profile'];
+  static const _tabRoutes = ['/home', '/save', '/money', '/profile'];
 
   @override
-  Widget build(BuildContext context) {
-    List screen = [
-      HomeScreen(),
-      SaveScreen(),
-      Center(child: Text(label[2])),
-      Center(child: Text(label[3])),
-    ];
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex.clamp(0, _labels.length - 1);
+  }
 
-    return Scaffold(
-      body: screen[_currentIndex],
-      bottomNavigationBar: _buildBottomNavigationBar,
+  void _go(int index) {
+    if (index == _currentIndex) return;
+    setState(() => _currentIndex = index);
+
+    Navigator.of(context).pushReplacement(
+      NoAnimationPageRoute(
+        settings: RouteSettings(name: _tabRoutes[index]),
+        builder: (_) => MainScreen(initialIndex: index),
+      ),
     );
   }
 
-  get _buildBottomNavigationBar {
-    List<Icon> icon = [
-      Icon(Icons.home),
-      Icon(Icons.save),
-      Icon(Icons.money),
-      Icon(Icons.person),
+  @override
+  Widget build(BuildContext context) {
+    final screens = <Widget>[
+      const HomeScreen(),
+      const SaveScreen(),
+      Center(child: Text(_labels[2])),
+      Center(child: Text(_labels[3])),
     ];
 
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.white,
-      currentIndex: _currentIndex,
-      selectedItemColor: Colors.cyan,
-      onTap: (index) {
-        setState(() {
-          _currentIndex = index;
-        });
-      },
-      items: List.generate(icon.length, (index) {
-        return BottomNavigationBarItem(icon: icon[index], label: label[index]);
-      }),
+    return Scaffold(
+      body: screens[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        currentIndex: _currentIndex,
+        selectedItemColor: Colors.cyan,
+        onTap: _go,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
+          BottomNavigationBarItem(icon: Icon(Icons.save), label: 'Saved'),
+          BottomNavigationBarItem(icon: Icon(Icons.money), label: 'Money'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
+        ],
+      ),
     );
   }
 }

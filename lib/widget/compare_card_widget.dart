@@ -7,9 +7,7 @@ class CompareCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     return GestureDetector(
-      onTap: () {
-        debugPrint('object');
-      },
+      onTap: () {},
       child: Stack(
         alignment: Alignment.center,
         clipBehavior: Clip.none,

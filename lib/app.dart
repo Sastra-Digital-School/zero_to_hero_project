@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/view/main_screen.dart';
+import 'package:flutter_zth_first/routes/routes.dart';
 
 class SastraApp extends StatelessWidget {
   const SastraApp({super.key});
@@ -9,10 +9,8 @@ class SastraApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MainScreen(),
+      initialRoute: '/',
+      routes: routes,
     );
   }
 }
