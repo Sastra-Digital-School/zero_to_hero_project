@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zth_first/routes/routes.dart';
 import 'package:flutter_zth_first/view/home_screen.dart';
+import 'package:flutter_zth_first/view/profile_screen.dart';
 import 'package:flutter_zth_first/view/save_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -41,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
       const HomeScreen(),
       const SaveScreen(),
       Center(child: Text(_labels[2])),
-      Center(child: Text(_labels[3])),
+      ProfileScreen(),
     ];
 
     return Scaffold(
