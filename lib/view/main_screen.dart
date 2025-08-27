@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zth_first/routes/routes.dart';
 import 'package:flutter_zth_first/view/home_screen.dart';
-import 'package:flutter_zth_first/view/profile_screen.dart';
+import 'package:flutter_zth_first/feature/profile/view/profile_screen.dart';
 import 'package:flutter_zth_first/view/save_screen.dart';
 
 class MainScreen extends StatefulWidget {
