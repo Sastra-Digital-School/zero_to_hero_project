@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/models/personal_model.dart';
+import 'package:flutter_zth_first/feature/personal_detail/models/personal_model.dart';
 
 class PersonalDetailScreen extends StatelessWidget {
   // final String name;

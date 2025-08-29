@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/routes/routes.dart';
+import 'package:flutter_zth_first/config/theme/app_theme.dart';
+import 'package:flutter_zth_first/config/theme/theme_service.dart';
+import 'package:flutter_zth_first/core/routes/routes.dart';
 import 'package:get/get.dart';
 
 class SastraApp extends StatelessWidget {
@@ -7,9 +9,12 @@ class SastraApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final service = Get.find<ThemeService>();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Flexipay',
+      theme: AppTheme.light(),
+      themeMode: service.themeMode,
       initialRoute: '/',
       routes: routes,
     );

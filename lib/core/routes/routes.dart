@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/view/main_screen.dart';
-import 'package:flutter_zth_first/view/personal_detail_screen.dart';
+import 'package:flutter_zth_first/feature/main_screen/main_screen.dart';
+import 'package:flutter_zth_first/feature/personal_detail/view/personal_detail_screen.dart';
 
 class NoAnimationPageRoute<T> extends MaterialPageRoute<T> {
   NoAnimationPageRoute({required super.builder, super.settings});

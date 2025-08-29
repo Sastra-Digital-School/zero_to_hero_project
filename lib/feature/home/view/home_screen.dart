@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zth_first/config/theme/app_colors.dart';
 import 'package:flutter_zth_first/widget/compare_card_widget.dart';
 import 'package:flutter_zth_first/widget/price_card_widget.dart';
 import 'package:flutter_zth_first/widget/process_card_widget.dart';
@@ -17,10 +18,16 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: _buildAppBar,
-      body: _buildBody(context),
-      drawer: _buildDrawer(context),
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        resizeToAvoidBottomInset: true,
+        // appBar: _buildAppBar,
+        body: _buildBody(context),
+        drawer: _buildDrawer(context),
+      ),
     );
   }
 
@@ -100,6 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       child: SafeArea(
+        bottom: false,
         child: SingleChildScrollView(
           clipBehavior: Clip.none,
           padding: EdgeInsets.only(bottom: 100),
@@ -112,7 +120,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 25,
-                    child: Icon(Icons.dashboard),
+                    child: Icon(Icons.dashboard, color: AppColors.onSurface),
                   ),
                   Text(
                     'FLEXIPAY',
@@ -121,7 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   CircleAvatar(
                     backgroundColor: Colors.white,
                     radius: 25,
-                    child: Icon(Icons.notifications),
+                    child: Icon(
+                      Icons.notifications,
+                      color: AppColors.onSurface,
+                    ),
                   ),
                 ],
               ),

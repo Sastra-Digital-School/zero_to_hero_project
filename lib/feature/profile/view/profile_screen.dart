@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/controller/profile_controller.dart';
+import 'package:flutter_zth_first/feature/profile/controller/profile_controller.dart';
 import 'package:flutter_zth_first/feature/profile/widget/info_profile.dart';
 import 'package:get/get.dart';
 
