@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/feature/personal_detail/models/personal_model.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 class PersonalDetailScreen extends StatelessWidget {
-  // final String name;
-  // final String? email;
-  const PersonalDetailScreen({super.key});
+  final String? name;
+  final String? email;
+  const PersonalDetailScreen({super.key, this.email, this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -14,17 +15,29 @@ class PersonalDetailScreen extends StatelessWidget {
     // final name = value['name'];
     // final email = value['email'];
 
-    final value = ModalRoute.of(context)?.settings.arguments;
+    // final value = ModalRoute.of(context)?.settings.arguments;
 
-    final personal = value is PersonalModel
-        ? value
-        : PersonalModel(id: 0, name: 'unknown', email: 'unknown');
+    // final personal = value is PersonalModel
+    //     ? value
+    //     : PersonalModel(id: 0, name: 'unknown', email: 'unknown');
 
-    final name = personal.name ?? '';
-    final email = personal.email ?? '';
+    // final name = personal.name ?? '';
+    // final email = personal.email ?? '';
+
+    final value = Get.arguments;
+
+    String names = value['name'];
+    String emails = value['email'];
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Personal Details"), centerTitle: true),
+      appBar: AppBar(
+        systemOverlayStyle: SystemUiOverlayStyle.dark,
+        title: const Text(
+          "Personal Details",
+          style: TextStyle(color: Colors.black),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -41,19 +54,20 @@ class PersonalDetailScreen extends StatelessWidget {
 
             // Name
             Text(
-              name,
-              style: Theme.of(
-                context,
-              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
+              names,
+              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             const SizedBox(height: 8),
 
             // Email
             Text(
-              email,
+              emails,
               style: Theme.of(
                 context,
-              ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
+              ).textTheme.bodyMedium?.copyWith(color: Colors.black),
             ),
             const SizedBox(height: 24),
 

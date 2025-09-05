@@ -20,7 +20,7 @@ class SaveScreen extends StatelessWidget {
       ),
       leading: Icon(Icons.menu, color: Colors.white),
       centerTitle: true,
-      expandedHeight: 150,
+      expandedHeight: 68,
       actions: [
         Icon(Icons.search, color: Colors.white),
         SizedBox(width: 20),
@@ -35,14 +35,10 @@ class SaveScreen extends StatelessWidget {
               colors: [Colors.blue, const Color.fromARGB(255, 0, 71, 128)],
             ),
             borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(40),
-              bottomRight: Radius.circular(40),
+              bottomLeft: Radius.circular(25),
+              bottomRight: Radius.circular(25),
             ),
           ),
-        ),
-        title: SingleChildScrollView(
-          padding: const EdgeInsets.only(left: 20, right: 20, top: 130),
-          child: Column(children: [SearchBar(hintText: 'Search')]),
         ),
       ),
     );

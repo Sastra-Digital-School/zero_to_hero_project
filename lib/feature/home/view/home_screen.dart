@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zth_first/config/theme/app_colors.dart';
+import 'package:flutter_zth_first/core/routes/app_routes.dart';
+import 'package:flutter_zth_first/feature/personal_detail/view/personal_detail_screen.dart';
 import 'package:flutter_zth_first/widget/compare_card_widget.dart';
 import 'package:flutter_zth_first/widget/price_card_widget.dart';
 import 'package:flutter_zth_first/widget/process_card_widget.dart';
@@ -7,6 +9,7 @@ import 'package:flutter_zth_first/widget/row_icon_feature_widget.dart';
 import 'package:flutter_zth_first/widget/search_widget.dart';
 import 'package:flutter_zth_first/widget/top_bards_warp_widget.dart';
 import 'package:flutter_zth_first/widget/top_brand_row_icon_widget.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -137,7 +140,44 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SearchWidget(),
-              RowIconFeatureWidget(),
+              RowIconFeatureWidget(
+                onTap: (index) {
+                  switch (index) {
+                    case 0:
+                      Get.to(
+                        PersonalDetailScreen(),
+                        arguments: {
+                          'name': 'Sithy168',
+                          'email': 'admin@admin.com',
+                        },
+                      );
+                      break;
+                    case 1:
+                      Get.toNamed(
+                        '/personal',
+                        arguments: {
+                          'name': 'Sithy168',
+                          'email': 'admin@admin.com',
+                        },
+                      );
+                      break;
+                    case 2:
+                      RouteView.save.go(
+                        arguments: {
+                          'name': 'Sithy168',
+                          'email': 'admin@admin.com',
+                        },
+                      );
+                      break;
+                    case 3:
+                      Navigator.pushNamed(context, '/deals');
+                      break;
+                    case 4:
+                      Navigator.pushNamed(context, '/saved');
+                      break;
+                  }
+                },
+              ),
               CompareCardWidget(),
               PriceCardWidget(),
               ProcessCardWidget(),

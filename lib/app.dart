@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_zth_first/config/theme/app_theme.dart';
 import 'package:flutter_zth_first/config/theme/theme_service.dart';
-import 'package:flutter_zth_first/core/routes/routes.dart';
+import 'package:flutter_zth_first/config/binding/binding.dart';
 import 'package:get/get.dart';
+
+import 'core/routes/app_pages.dart';
 
 class SastraApp extends StatelessWidget {
   const SastraApp({super.key});
@@ -15,8 +17,17 @@ class SastraApp extends StatelessWidget {
       title: 'Flexipay',
       theme: AppTheme.light(),
       themeMode: service.themeMode,
+      initialBinding: InitBinding(),
       initialRoute: '/',
-      routes: routes,
+      // initialRoute: RouteView.home.name,
+      getPages: AppRouting.route,
+
+      // getPages: [
+      //   GetPage(name: '/', page: () => const MainScreen()),
+      //   GetPage(name: '/personal', page: () => const PersonalDetailScreen()),
+      // ],
+
+      // routes: routes,
     );
   }
 }

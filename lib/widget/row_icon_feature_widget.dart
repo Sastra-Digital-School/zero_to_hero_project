@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RowIconFeatureWidget extends StatelessWidget {
-  const RowIconFeatureWidget({super.key});
+  final void Function(int)? onTap;
+
+  const RowIconFeatureWidget({super.key, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -16,20 +18,25 @@ class RowIconFeatureWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: List.generate(5, (index) {
-        return Column(
-          spacing: 5,
-          children: [
-            Container(
-              height: 55,
-              width: 55,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(18),
+        return GestureDetector(
+          onTap: () {
+            onTap?.call(index);
+          },
+          child: Column(
+            spacing: 5,
+            children: [
+              Container(
+                height: 55,
+                width: 55,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: Icon(icon[index]),
               ),
-              child: Icon(icon[index]),
-            ),
-            Text(label[index]),
-          ],
+              Text(label[index]),
+            ],
+          ),
         );
       }),
     );

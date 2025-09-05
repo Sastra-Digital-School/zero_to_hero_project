@@ -3,9 +3,8 @@ import 'package:flutter_zth_first/feature/profile/controller/profile_controller.
 import 'package:flutter_zth_first/feature/profile/widget/info_profile.dart';
 import 'package:get/get.dart';
 
-class ProfileScreen extends StatelessWidget {
-  final controler = Get.put(ProfileController());
-  ProfileScreen({super.key});
+class ProfileScreen extends GetView<ProfileController> {
+  const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +40,9 @@ class ProfileScreen extends StatelessWidget {
                     itemCount: 2,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: Icon(controler.icon[index]),
+                        leading: Icon(controller.icon[index]),
                         title: Text(
-                          controler.title[index],
+                          controller.title[index],
                           style: TextStyle(fontSize: 18),
                         ),
                         trailing: Icon(Icons.arrow_forward_ios_rounded),
@@ -60,9 +59,9 @@ class ProfileScreen extends StatelessWidget {
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: Icon(controler.icon[index + 2]),
+                        leading: Icon(controller.icon[index + 2]),
                         title: Text(
-                          controler.title[index + 2],
+                          controller.title[index + 2],
                           style: TextStyle(fontSize: 18),
                         ),
                         trailing: Icon(Icons.arrow_forward_ios_rounded),
@@ -79,9 +78,9 @@ class ProfileScreen extends StatelessWidget {
                     itemCount: 3,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: Icon(controler.icon[index + 5]),
+                        leading: Icon(controller.icon[index + 5]),
                         title: Text(
-                          controler.title[index + 5],
+                          controller.title[index + 5],
                           style: TextStyle(fontSize: 18),
                         ),
                         trailing: Icon(Icons.arrow_forward_ios_rounded),
