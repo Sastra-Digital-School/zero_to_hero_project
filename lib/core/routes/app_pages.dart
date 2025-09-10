@@ -3,6 +3,8 @@ import 'package:flutter_zth_first/core/routes/app_routes.dart';
 import 'package:flutter_zth_first/feature/home/view/home_screen.dart';
 import 'package:flutter_zth_first/feature/main_screen/main_screen.dart';
 import 'package:flutter_zth_first/feature/personal_detail/view/personal_detail_screen.dart';
+import 'package:flutter_zth_first/feature/product_detail/binding/product_detail_binding.dart';
+import 'package:flutter_zth_first/feature/product_detail/view/product_detail.dart';
 import 'package:flutter_zth_first/feature/profile/view/profile_screen.dart';
 import 'package:flutter_zth_first/feature/save/view/save_screen.dart';
 import 'package:get/get.dart';
@@ -46,6 +48,13 @@ class AppRouting {
           name: "/${e.name}",
           page: () => PersonalDetailScreen(),
           transition: Transition.noTransition,
+        );
+      case RouteView.productDetail:
+        return GetPage(
+          name: "/${e.name}",
+          page: () => ProductDetail(),
+          transition: Transition.noTransition,
+          binding: ProductDetailBinding(),
         );
     }
   }).toList();

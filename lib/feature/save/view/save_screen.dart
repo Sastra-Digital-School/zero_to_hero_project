@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/feature/personal_detail/models/personal_model.dart';
+import 'package:flutter_zth_first/core/routes/app_routes.dart';
 import 'package:flutter_zth_first/feature/save/controller/save_controller.dart';
 import 'package:get/get.dart';
 
@@ -64,27 +64,28 @@ class SaveScreen extends GetView<SaveController> {
                 final product = controller.productModel.products?[index];
                 return GestureDetector(
                   onTap: () {
-                    // Navigator.of(context).push(
-                    //   MaterialPageRoute(
-                    //     builder: (_) =>
-                    //         PersonalDetailScreen(name: name, email: 'admin@admin.com'),
-                    //   ),
+                    final value = {
+                      'name': 'Chamreoun Sithy',
+                      'email': 'admin@admin.com',
+                    };
+                    RouteView.productDetail.go(arguments: '${product?.id}');
+
+                    // // Navigator.of(context).push(
+                    // //   MaterialPageRoute(
+                    // //     builder: (_) =>
+                    // //         PersonalDetailScreen(name: name, email: 'admin@admin.com'),
+                    // //   ),
+                    // // );
+
+                    // final valueNew = PersonalModel(
+                    //   id: index,
+                    //   name: 'Sithy168',
+                    //   email: 'admin168@admin.com',
                     // );
 
-                    final valueNew = PersonalModel(
-                      id: index,
-                      name: 'Sithy168',
-                      email: 'admin168@admin.com',
-                    );
-
-                    // final value = {
-                    //   'name': 'Chamreoun Sithy',
-                    //   'email': 'admin@admin.com',
-                    // };
-
-                    Navigator.of(
-                      context,
-                    ).pushNamed('/personal', arguments: valueNew);
+                    // Navigator.of(
+                    //   context,
+                    // ).pushNamed('/personal', arguments: valueNew);
                   },
                   child: Container(
                     margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),

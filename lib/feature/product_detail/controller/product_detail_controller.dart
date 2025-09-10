@@ -1,32 +1,36 @@
 import 'package:flutter_zth_first/config/service/api_service.dart';
 import 'package:flutter_zth_first/feature/product_detail/models/product_detail_model.dart';
-import 'package:flutter_zth_first/feature/save/model/product_model.dart';
 import 'package:get/get.dart';
 
-class SaveController extends GetxController {
+class ProductDetailController extends GetxController {
   ApiService get api => ApiService(baseUrl: 'https://dummyjson.com');
-
   var loading = false.obs;
 
-  ProductModel productModel = ProductModel();
   ProductModelDetail productModelDetail = ProductModelDetail();
 
-  Future<void> fetchData() async {
+  Future<void> fetchDataDetail(String? id) async {
     loading.value = true;
 
     await api.callApi(
-      endpoint: '/products',
+      endpoint: '/products/$id',
       fromJson: (json) {
-        productModel = ProductModel.fromJson(json);
+        productModelDetail = ProductModelDetail.fromJson(json);
       },
     );
 
     loading.value = false;
   }
 
+  var showReview = true.obs;
+
+  void toggleReview() {
+    showReview.value = !showReview.value;
+  }
+
   @override
   void onInit() async {
     super.onInit();
-    await fetchData();
+    var id = Get.arguments;
+    await fetchDataDetail(id);
   }
 }
