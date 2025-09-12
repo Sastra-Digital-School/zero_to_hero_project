@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_zth_first/config/theme/app_theme.dart';
 import 'package:flutter_zth_first/config/theme/theme_service.dart';
 import 'package:flutter_zth_first/config/binding/binding.dart';
@@ -12,22 +13,29 @@ class SastraApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final service = Get.find<ThemeService>();
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flexipay',
-      theme: AppTheme.light(),
-      themeMode: service.themeMode,
-      initialBinding: InitBinding(),
-      initialRoute: '/',
-      // initialRoute: RouteView.home.name,
-      getPages: AppRouting.route,
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final isTablet = constraints.maxWidth >= 600;
 
-      // getPages: [
-      //   GetPage(name: '/', page: () => const MainScreen()),
-      //   GetPage(name: '/personal', page: () => const PersonalDetailScreen()),
-      // ],
-
-      // routes: routes,
+        return ScreenUtilInit(
+          designSize: isTablet ? const Size(1024, 1366) : const Size(375, 812),
+          child: GetMaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Flexipay',
+            theme: AppTheme.light(),
+            themeMode: service.themeMode,
+            initialBinding: InitBinding(),
+            initialRoute: '/',
+            // initialRoute: RouteView.home.name,
+            getPages: AppRouting.route,
+            // getPages: [
+            //   GetPage(name: '/', page: () => const MainScreen()),
+            //   GetPage(name: '/personal', page: () => const PersonalDetailScreen()),
+            // ],
+            // routes: routes,
+          ),
+        );
+      },
     );
   }
 }

@@ -64,10 +64,10 @@ class SaveScreen extends GetView<SaveController> {
                 final product = controller.productModel.products?[index];
                 return GestureDetector(
                   onTap: () {
-                    final value = {
-                      'name': 'Chamreoun Sithy',
-                      'email': 'admin@admin.com',
-                    };
+                    // final value = {
+                    //   'name': 'Chamreoun Sithy',
+                    //   'email': 'admin@admin.com',
+                    // };
                     RouteView.productDetail.go(arguments: '${product?.id}');
 
                     // // Navigator.of(context).push(

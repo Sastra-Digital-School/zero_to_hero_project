@@ -1,9 +1,10 @@
 import 'package:flutter_zth_first/config/service/api_service.dart';
+import 'package:flutter_zth_first/core/data/string_const.dart';
 import 'package:flutter_zth_first/feature/product_detail/models/product_detail_model.dart';
 import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
-  ApiService get api => ApiService(baseUrl: 'https://dummyjson.com');
+  ApiService get api => ApiService(baseUrl: baseUrl);
   var loading = false.obs;
 
   ProductModelDetail productModelDetail = ProductModelDetail();

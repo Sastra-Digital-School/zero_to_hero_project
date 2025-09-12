@@ -5,8 +5,8 @@ import 'package:flutter_zth_first/feature/product_detail/models/product_detail_m
 import 'package:flutter_zth_first/widget/rate_start.dart';
 import 'package:get/get.dart';
 
-class ProductDetail extends GetView<ProductDetailController> {
-  const ProductDetail({super.key});
+class ProductDetailMedium extends GetView<ProductDetailController> {
+  const ProductDetailMedium({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class ProductDetail extends GetView<ProductDetailController> {
         Stack(
           clipBehavior: Clip.none,
           children: [
-            CircleAvatar(radius: 150, backgroundColor: Colors.grey.shade300),
+            CircleAvatar(radius: 150, backgroundColor: Colors.cyan.shade300),
             Positioned(top: -55, child: Image.network(data.thumbnail ?? '')),
           ],
         ),
