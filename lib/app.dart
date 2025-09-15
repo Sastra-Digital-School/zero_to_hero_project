@@ -16,7 +16,6 @@ class SastraApp extends StatelessWidget {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
         final isTablet = constraints.maxWidth >= 600;
-
         return ScreenUtilInit(
           designSize: isTablet ? const Size(1024, 1366) : const Size(375, 812),
           child: GetMaterialApp(
@@ -33,6 +32,16 @@ class SastraApp extends StatelessWidget {
             //   GetPage(name: '/personal', page: () => const PersonalDetailScreen()),
             // ],
             // routes: routes,
+            builder: (context, child) {
+              final mq = MediaQuery.of(context);
+              return MediaQuery(
+                data: mq.copyWith(
+                  textScaler: TextScaler.linear(1),
+                  boldText: false,
+                ),
+                child: child ?? SizedBox(),
+              );
+            },
           ),
         );
       },

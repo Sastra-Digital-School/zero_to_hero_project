@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_zth_first/config/service/local_service.dart';
 import 'package:flutter_zth_first/config/theme/app_theme.dart';
 import 'package:flutter_zth_first/feature/product_detail/controller/product_detail_controller.dart';
 import 'package:flutter_zth_first/feature/product_detail/models/product_detail_model.dart';
-import 'package:flutter_zth_first/widget/rate_start.dart';
 import 'package:get/get.dart';
 
 class ProductDetail extends GetView<ProductDetailController> {
@@ -121,29 +121,54 @@ class ProductDetail extends GetView<ProductDetailController> {
           ),
           Text(data.description ?? '', style: textTheme.bodyLarge),
           SizedBox(height: 50),
-          GestureDetector(
-            onTap: () {
-              controller.toggleReview();
+          // GestureDetector(
+          //   onTap: () {
+          //     controller.toggleReview();
+          //   },
+          //   child: Row(
+          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //     children: [
+          //       StarRatingWidget(size: 30, rating: data.rating),
+          //       Text(
+          //         '${data.reviews?.length} reviews',
+          //         style: textTheme.bodyLarge,
+          //       ),
+          //     ],
+          //   ),
+          // ),
+          // SizedBox(height: 20),
+          // Obx(
+          //   () => controller.showReview.value
+          //       ? SizedBox()
+          //       : Text(
+          //           '${data.reviews?.map((e) => e.comment).join(', ').replaceAll(', ', '\n')}',
+          //           style: textTheme.titleLarge,
+          //         ),
+          // ),
+          ElevatedButton(
+            onPressed: () {
+              LocalStorageService.instance.setString(
+                'key',
+                '34r534r53543523534rtdfasdfsdfasdfasfredrt34tfccasdfdfdse3245413451',
+              );
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                StarRatingWidget(size: 30, rating: data.rating),
-                Text(
-                  '${data.reviews?.length} reviews',
-                  style: textTheme.bodyLarge,
-                ),
-              ],
-            ),
+            child: Text('Read Key'),
           ),
-          SizedBox(height: 20),
-          Obx(
-            () => controller.showReview.value
-                ? SizedBox()
-                : Text(
-                    '${data.reviews?.map((e) => e.comment).join(', ').replaceAll(', ', '\n')}',
-                    style: textTheme.titleLarge,
-                  ),
+          ElevatedButton(
+            onPressed: () {
+              final key = LocalStorageService.instance.getString('key');
+              debugPrint(key);
+            },
+            child: Text('Get Key'),
+          ),
+          ElevatedButton(
+            style: ButtonStyle(
+              backgroundColor: WidgetStatePropertyAll(Colors.red),
+            ),
+            onPressed: () {
+              LocalStorageService.instance.remove('key');
+            },
+            child: Text('Remove'),
           ),
         ],
       ),

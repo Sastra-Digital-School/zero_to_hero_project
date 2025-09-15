@@ -1,10 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_zth_first/config/service/api_service.dart';
+import 'package:flutter_zth_first/config/service/auth_service.dart';
 import 'package:flutter_zth_first/core/data/string_const.dart';
 import 'package:flutter_zth_first/feature/product_detail/models/product_detail_model.dart';
 import 'package:get/get.dart';
 
 class ProductDetailController extends GetxController {
-  ApiService get api => ApiService(baseUrl: baseUrl);
+  final auth = AuthService();
+
+  final accessToken = ''.obs;
+
+  ApiService get api =>
+      ApiService(baseUrl: baseUrl, accessToken: accessToken.value);
+
   var loading = false.obs;
 
   ProductModelDetail productModelDetail = ProductModelDetail();
@@ -14,6 +22,7 @@ class ProductDetailController extends GetxController {
 
     await api.callApi(
       endpoint: '/products/$id',
+      headers: {'Content-Type': 'application/json'},
       fromJson: (json) {
         productModelDetail = ProductModelDetail.fromJson(json);
       },
@@ -33,5 +42,9 @@ class ProductDetailController extends GetxController {
     super.onInit();
     var id = Get.arguments;
     await fetchDataDetail(id);
+
+    accessToken.value = await auth.getAccessToken() ?? '';
+
+    debugPrint(accessToken.value);
   }
 }

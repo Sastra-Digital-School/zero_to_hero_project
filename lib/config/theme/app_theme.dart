@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_colors.dart';
 import 'app_gradients.dart';
 
@@ -50,7 +49,7 @@ class AppTheme {
         )
         .copyWith(
           displayLarge: TextStyle(
-            fontSize: 32.sp,
+            fontSize: 32,
             fontWeight: FontWeight.w700,
             letterSpacing: -0.5,
           ),
