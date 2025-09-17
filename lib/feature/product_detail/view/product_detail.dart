@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_zth_first/config/service/local_service.dart';
 import 'package:flutter_zth_first/config/theme/app_theme.dart';
 import 'package:flutter_zth_first/feature/product_detail/controller/product_detail_controller.dart';
 import 'package:flutter_zth_first/feature/product_detail/models/product_detail_model.dart';
@@ -102,25 +101,26 @@ class ProductDetail extends GetView<ProductDetailController> {
       child: ListView(
         padding: EdgeInsets.all(16),
         children: [
-          Text(data.title ?? '', style: textTheme.displayMedium),
-          Row(
-            children: [
-              Text(
-                '\$ ${data.price}',
-                style: textTheme.titleSmall?.copyWith(
-                  fontSize: 25,
-                  color: Colors.black,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 50),
-          Text(
-            'Description',
-            style: textTheme.titleLarge?.copyWith(color: Colors.black),
-          ),
-          Text(data.description ?? '', style: textTheme.bodyLarge),
-          SizedBox(height: 50),
+          // Text(data.title ?? '', style: textTheme.displayMedium),
+          // Row(
+          //   children: [
+          //     Text(
+          //       '\$ ${data.price}',
+          //       style: textTheme.titleSmall?.copyWith(
+          //         fontSize: 25,
+          //         color: Colors.black,
+          //       ),
+          //     ),
+          //   ],
+          // ),
+          // SizedBox(height: 50),
+          // Text(
+          //   'Description',
+          //   style: textTheme.titleLarge?.copyWith(color: Colors.black),
+          // ),
+          // Text(data.description ?? '', style: textTheme.bodyLarge),
+          // SizedBox(height: 50),
+
           // GestureDetector(
           //   onTap: () {
           //     controller.toggleReview();
@@ -145,30 +145,58 @@ class ProductDetail extends GetView<ProductDetailController> {
           //           style: textTheme.titleLarge,
           //         ),
           // ),
+          TextField(controller: controller.nameController.value),
+          SizedBox(height: 10),
+          TextField(controller: controller.priceController.value),
+          SizedBox(height: 10),
           ElevatedButton(
-            onPressed: () {
-              LocalStorageService.instance.setString(
-                'key',
-                '34r534r53543523534rtdfasdfsdfasdfasfredrt34tfccasdfdfdse3245413451',
+            onPressed: () async {
+              // LocalStorageService.instance.setString(
+              //   'key',
+              //   '34r534r53543523534rtdfasdfsdfasdfasfredrt34tfccasdfdfdse3245413451',
+              // );
+
+              await controller.insertProduct(
+                controller.nameController.value.text,
+                double.parse(controller.priceController.value.text),
               );
+
+              controller.nameController.value.text = '';
+              controller.priceController.value.text = '';
+
+              await controller.getProduct();
             },
-            child: Text('Read Key'),
+            child: Text('Read Product'),
           ),
           ElevatedButton(
-            onPressed: () {
-              final key = LocalStorageService.instance.getString('key');
-              debugPrint(key);
+            onPressed: () async {
+              // final key = LocalStorageService.instance.getString('key');
+              // debugPrint(key);
+
+              await controller.getProduct();
             },
-            child: Text('Get Key'),
+            child: Text('Get Product'),
           ),
           ElevatedButton(
             style: ButtonStyle(
               backgroundColor: WidgetStatePropertyAll(Colors.red),
             ),
-            onPressed: () {
-              LocalStorageService.instance.remove('key');
+            onPressed: () async {
+              // LocalStorageService.instance.remove('key');
+
+              await controller.removeProductAll();
+              await controller.getProduct();
             },
             child: Text('Remove'),
+          ),
+
+          ...List.generate(
+            controller.products.length,
+            (index) => ListTile(
+              leading: Text(controller.products[index].id.toString()),
+              title: Text(controller.products[index].name),
+              trailing: Text(controller.products[index].price.toString()),
+            ),
           ),
         ],
       ),

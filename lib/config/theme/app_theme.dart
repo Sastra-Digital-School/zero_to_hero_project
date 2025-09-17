@@ -128,7 +128,7 @@ class AppTheme {
       // Inputs (Search/TextField pill)
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: Colors.white,
+        fillColor: Colors.cyan,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 14,
